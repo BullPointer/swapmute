@@ -1,0 +1,463 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+body{
+	background-color:#242222;
+	overflow-x: hidden;
+}
+
+.navbar{
+	position: relative;
+	height: 60px;
+	width: 100%;
+	color: #fff;
+	background-color: #000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.navbar h2{
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	transform: translatey(-50%);
+	font-size: 20px;
+}
+
+.navbar nav ul{
+	display: flex;
+}
+
+.navbar nav ul li{
+	list-style: none;
+}
+
+.navbar nav ul li a{
+	text-decoration: none;
+	padding: 6px 0px;
+	margin: 0 12px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #fff;
+}
+
+.navbar nav ul li a:hover{
+	border-top: 2px solid #fff;
+}
+
+.active{
+	border-top: 2px solid #fff;
+}
+
+.toggle{
+	display: none;
+	position: absolute;
+	top: 15px;
+	right: 30px;
+	width: 30px;
+	height: 30px;
+	background: url(../image/menu.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 30px;
+	z-index: 9999;
+}
+
+.toggle.active{
+	background: url(../image/close.png) center center/cover no-repeat;
+/*	background-repeat: no-repeat;*/
+	background-size: 30px;
+	z-index: 9999;
+	filter: invert(1);
+}
+
+.swapmute{
+	text-align: center;
+	color: #fff;
+	margin-top: 70px;
+}
+
+.swapmute p{
+    font-size: 35px;
+	font-weight: 100;
+}
+
+.swapmute span{
+	font-weight: 700;
+	font-size: 38px;
+}
+
+.swapmute .tutorial{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.swapmute .tutorial p{
+	padding: 20px 20px;
+	font-size: 18px;
+}
+
+.swapmute .tutorial p span{
+	background-color: #000;
+	color: #fff;
+	border-radius: 50%;
+	font-size: 16px;
+	padding: 1px 8px;
+	margin: 0 10px;
+}
+
+.exchange-container{
+	background-color: #000;
+	max-width: 800px;
+    border-radius: 25px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px;
+    color: #fff;
+}
+
+.exchange-container a{
+	width: 80%;
+	margin: 20px auto;
+	padding: 12px;
+	background-color: #ff4b12;
+	text-decoration: none;
+	border-radius: 50px;
+	display: grid;
+	place-items: center;
+	color: #fff;
+	font-weight: 600;
+}
+
+.exchange-container .exchange-box{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 85%;
+    margin: auto;
+}
+
+.exchange-container .exchange-box .exchange{
+	width: 250px;
+	margin: 20px 0;
+	color: #999;
+}
+
+.exchange-container .exchange-box .exchange .selling{
+	display: flex;
+	justify-content: space-between;
+}
+
+.exchange-container .exchange-box .exchange .selling p{
+	font-size: 13px;
+}
+
+.exchange-container .exchange-box .exchange .bitcoin{
+	max-width: 250px;
+	background-color: #242222;
+	border-radius: 15px;
+	margin: 10px 0;
+	padding: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.exchange-container .exchange-box .exchange .bitcoin select{
+	width: 100px;
+	padding: 8px;
+	border-radius: 15px;
+	color: #fff;
+	font-weight: 600;
+	background-color: #4c4848 ;
+	margin-right: 5px;
+	outline: none;
+	border: none;
+}
+
+.accordion{
+	margin: 65px auto;
+	max-width: 800px;
+}
+
+.accordion .p{
+	font-size: 27px;
+	font-weight: 600;
+	text-align: center;
+	color: #fff;
+}
+
+.accordion .contentbx{
+	position: relative;
+	margin: 10px 20px;
+}
+
+.accordion .contentbx .label{
+	position: relative;
+	padding: 10px;
+	background: #000;
+	color: #999;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.accordion .contentbx p{
+	color: #000;
+	font-weight: 900;
+}
+
+.accordion  .contentbx .label::before{
+	content: '+';
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	transform: translateY(-50%);
+	font-size: 1.5em;
+}
+
+.accordion  .contentbx.active .label::before{
+	content: '-';
+}
+
+.accordion  .contentbx .content{
+	position: relative;
+	background: #fff;
+	height: 0;
+	overflow: hidden;
+	transition: 0.5s;
+	overflow-y: auto;
+}
+
+.accordion  .contentbx .content::-webkit-scrollbar{
+	display: none;
+}
+
+.accordion  .contentbx.active .content{
+	height: 150px;
+	padding: 10px;
+}
+
+.input-box{
+	width: 80%;
+	position: relative;
+	padding: 6px 0;
+	display: flex;
+    align-items: flex-start;
+	flex-direction: column;
+	margin: auto;
+}
+
+.input-box input{
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    background-color: #2a2828 ;
+}
+
+.input-box .wallet{
+	display: block;
+	width: 100px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #4c4848;
+    border-radius: 7px;
+    text-decoration: none;
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-76%);
+    padding: 4px;
+    font-weight: 500;
+}
+
+.input-box .wallet .fa-wallet{
+	padding-right: 5px;
+}
+
+.input-box .icon{
+    font-size: 20px;
+    width: 30px;
+    background-color: #2a2828 ;
+    color: #fff;
+    border-radius: 7px;
+    text-decoration: none;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-78%);
+    padding: 4px;
+    font-weight: 500;
+}
+
+footer{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 25px 20px;
+	margin-top: 75px;
+	color: #999;
+	background-color: #000;
+}
+
+footer .copy-right{
+	max-width: 392px;
+	margin-right: 60px;
+	margin-left: 15px;
+}
+
+footer .copy-right p span{
+	font-weight: 600;
+	color: #fff;
+	font-size: 20px;
+}
+
+footer .copy-right h1{
+	color: #fff;
+}
+
+footer .Disclaimer{
+	margin-top: 9px;
+	color: #fff;
+}
+
+footer .about{
+	margin: 9px 65px;
+	color: #fff;
+}
+
+footer .Company{
+	margin-top: 9px;
+	margin-right: 40px;
+	color: #fff;
+}
+
+footer .Company ul li{
+	list-style: none;
+}
+
+footer .Company ul li a{
+	text-decoration: none;
+	color: #999;
+}
+
+
+footer .social-media{
+	margin-top: 9px;
+	max-width: 301px;
+}
+
+footer .social-media h3{
+	color: #fff;
+}
+
+footer .social-media ul{
+	display: flex;
+	margin-top: 15px;
+}
+
+footer .social-media ul li{
+    list-style: none;
+}
+
+footer .social-media ul li a{
+	text-decoration: none;
+	color: #fff;
+	padding: 0 10px;
+	font-size: 22px;
+	transition: .4s ;
+}
+
+footer .social-media ul li a .fa-brands{
+	transition: .5s;
+}
+
+footer .social-media ul li a .fa-brands:hover{
+	transform: rotate(360deg);
+}
+
+footer .social-media .a {
+	text-decoration: none;
+    height: 38px;
+    max-width: 165px;
+    color: #fff;
+    background-color: #ff4b12;
+    border-radius: 50px;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    margin: 20px -10px;
+}
+
+
+@media (max-width : 700px){
+
+.navbar nav{
+	width: 100%;
+	height: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translateX(100%);
+	transition: .5s;
+	z-index: 999;
+}
+
+.navbar .nav ul{
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.navbar .nav ul li a{
+	color: #000;
+	padding: 25px 0;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+
+.toggle{
+	display: block;
+	z-index: 9999;
+}
+
+.navbar .nav.active{
+	transform: translateX(0%);
+}
+}
+
+@media (max-width :675px){
+    .exchange-container{
+    	margin: 20px 15px;
+    }
+
+	.exchange-container .exchange-box{
+		display: flex;
+		flex-direction: column;
+	}
+
+	.exchange-container .exchange-box .exchange {
+        width: 90%;
+    }
+
+    .exchange-container .exchange-box .exchange .bitcoin {
+    	max-width: 500px;
+    }
+
+    .exchange-container .exchange-box .exchange {
+        width: 90%;
+    }
+}
