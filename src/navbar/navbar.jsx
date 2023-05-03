@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 
 function Navbar() {
-  const [btnState, setBtnState] = useState(false);
+  const [btnState, setBtnState] = useState({opend: false});
 
   // for responsive navigation bar
   const toggle = () => {

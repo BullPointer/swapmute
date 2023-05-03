@@ -1,4 +1,4 @@
-
+import { Icon } from '@iconify/react';
 
 function Footer() {
   
@@ -33,10 +33,30 @@ function Footer() {
             <h3>Social Media</h3>
             <p>If you to stay up-to-date with the latest news. updates, and promotions from our platform, be sure to follow us on social media</p>
             <ul>
-                <li><a href="#"><i className="fa-brands fa-linkedin"></i></a></li>
-                <li><a href="#"><i className="fa-brands fa-twitter"></i></a></li>
-                <li><a href="#"><i className="fa-brands fa-instagram"></i></a></li>
-                <li><a href="#"><i className="fa-brands fa-facebook"></i></a></li>
+            <li><a href="#">
+                <Icon 
+                    className="fa-brands"
+                    icon="radix-icons:linkedin-logo" 
+                />
+            </a></li>                
+            <li><a href="#">
+                <Icon 
+                    className="fa-brands"
+                    icon="iconoir:twitter" 
+                />
+            </a></li>                
+            <li><a href="#">
+                <Icon 
+                    className="fa-brands"
+                    icon="jam:instagram" 
+                />
+            </a></li>                   
+            <li><a href="#">
+                <Icon 
+                    className="fa-brands"
+                    icon="akar-icons:facebook-fill"
+                />
+            </a></li>   
             </ul>
             <a href="#" className="a">Exchange</a>
         </div>

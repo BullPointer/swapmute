@@ -1,52 +1,45 @@
+import { useState } from 'react';
+import faq from './database/faq';
+import Faqtext from './faqtext';
 
 
 function FaQ() {
-  
+  // start of responsive faq drop down
+
+  const [clickedIndex, setClickedIndex] = useState({
+    currentObj: null, faq: [...faq]
+  });
+
+  function handleClick(index){
+    setClickedIndex({...clickedIndex, currentObj: clickedIndex.faq[index]});
+    if (clickedIndex.faq[index] === clickedIndex.currentObj) {
+      setClickedIndex({...clickedIndex, currentObj: null});
+    } else {
+      setClickedIndex({...clickedIndex, currentObj: clickedIndex.faq[index]});
+    }
+  }
+  function toggle(index) {
+    return (clickedIndex.faq[index] === clickedIndex.currentObj) ? 'active' : 'none';
+  }
+
+  // end of responsive faq drop down
     return(
       <>
       {/* <!-- start of FAQ section --> */}
-
-    <div className="accordion" id="FAQ">
-    <p className="p">Do you have any questions?</p>
-    <div className="contentbx">
-    <div className="label">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-    <div className="content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div className='accordion' id="FAQ">
+      <p className={'p'}>Do you have any questions?</p>
+      
+      {clickedIndex.faq.map((data, index) => (
+        <Faqtext 
+        key={index}
+        handleClick={handleClick} 
+        toggle={toggle}
+        data={data} 
+        index={index}
+        />
+      ))}
     </div>
-    </div>
-
-    <div className="contentbx">
-    <div className="label">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-    <div className="content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </div>
-    </div>
-
-
-    <div className="contentbx">
-    <div className="label">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-    <div className="content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididun
-          t ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </div>
-    </div>
-  </div>
-
+    
     {/* <!-- end of FAQ section --> */}
       </>
     )
