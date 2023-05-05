@@ -2,7 +2,6 @@
 export default [
     {
         _id: 0,
-        opened: false,
         label: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         content: `
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -15,7 +14,6 @@ export default [
     },
     {
         _id: 1,
-        opened: false,
         label: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         content: `
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -28,7 +26,6 @@ export default [
     },
     {
         _id: 2,
-        opened: true,
         label: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         content: `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
