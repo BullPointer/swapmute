@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
+import { ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { getCurrency, getRange, getEstimatedValue } from "../handleApi/currencyApi";
 import ErrorBoundary from "../ErrorBoundary";
 import Recieve from "./Exchange/recieve";
@@ -21,6 +23,7 @@ function ExchangeCurrency() {
   const [range, setRange] = useState({minRange: '', maxRange: ''});
   const [valueError, setValueError] = useState(false);
 
+
   const sendChange = (event) => {
     const regex = /^[0-9]*\.?[0-9]*$/ // /^[13][a-km-zA-HJ-NP-Z1-9]{25,80}$|^(bc1)[0-9A-Za-z]{25,80}$/ // /^[0-9]*\.?[0-9]*$/;   /^[0-9]*\.?[0-9]+$/;
     const inputValue = event.target.value;
@@ -30,7 +33,7 @@ function ExchangeCurrency() {
       setExchangeValue({
         ...exchangeValue,
         sendAmount: inputValue,
-        // isLoading: true,
+
       })
     } 
 
@@ -43,9 +46,20 @@ function ExchangeCurrency() {
     }
   };
   function handleSelectcurrency(data) {
+    setExchangeValue({
+      ...exchangeValue,
+      isLoading: true
+    })
+    setValueError(false);
     setExchangeData({...exchangeData, sendCurrency: data});
-    getApiRange();
-    getEstimatedAmount();
+
+  }
+  function handleFocus() {
+    setExchangeValue({
+      ...exchangeValue,
+      isLoading: true
+
+    })
   }
 
   async function getApiCurrency() {
@@ -63,22 +77,24 @@ function ExchangeCurrency() {
       });
 
     } else {
-      console.log(returnError(cryptoFrom.response));
+      // setValueError(false);
+      toast(returnError(cryptoFrom.response));
     }
   }
 
-    async function getApiRange() {
-      const range = await getRange(
-        link + 'get_ranges',
-        exchangeData.sendCurrency.symbol,
-        exchangeData.receiveCurrency.symbol
-      );
-      if(range.status == 200) {
-        setRange({minRange: range.data.min, maxRange: range.data.max});
-      } else {
-        console.log(returnError(range.response));
-      }
+  async function getApiRange() {
+    const range = await getRange(
+      link + 'get_ranges',
+      exchangeData.sendCurrency.symbol,
+      exchangeData.receiveCurrency.symbol
+    );
+    if(range.status == 200) {
+      setRange({minRange: range.data.min, maxRange: range.data.max});
+    } else {
+      // setValueError(false);
+      toast(returnError(range.response));
     }
+  }
     async function getEstimatedAmount() {
       const res = await getEstimatedValue(
         link + 'get_estimated',
@@ -87,9 +103,22 @@ function ExchangeCurrency() {
         exchangeValue.sendAmount
       );
       if(res.status == 200) {
-        setExchangeValue({...exchangeValue, receiveAmount:res.data});
+        setExchangeValue({
+          ...exchangeValue, 
+          receiveAmount:res.data, 
+          isLoading: false
+        });
+        setValueError(false);
+        setExchangeValue({...exchangeValue, isLoading: false});
+
       } else {
-        console.log(returnError(res.response));
+        if (res.response.status == 422) {
+          toast('Unprocessable Entity');
+        } else {
+          setValueError(false);
+          toast(returnError(res.response));
+        }
+        setExchangeValue({...exchangeValue, isLoading: true});
       }
     }
 
@@ -101,9 +130,13 @@ function ExchangeCurrency() {
     }, [exchangeValue.sendAmount]);
 
     useEffect(() => {
-
-      getApiCurrency();
       getApiRange();
+
+    }, [exchangeData.sendCurrency, exchangeValue.sendAmount]);
+    useEffect(() => {
+      getApiCurrency();
+      // getApiRange();
+
       if (exchangeValue.receiveAmount == '0') {
         setExchangeValue({...exchangeValue, isLoading: true});
       } else {
@@ -115,7 +148,7 @@ function ExchangeCurrency() {
     return(
       <>
         {/* <!-- start of currency exchange --> */}
-
+        <ToastContainer/>
         <div className="exchange-container">
           
           <h2>Select currency</h2>
@@ -127,6 +160,7 @@ function ExchangeCurrency() {
               value={exchangeValue.sendAmount}
               valueError={valueError}
               handleClick={handleSelectcurrency}
+              handleFocus={handleFocus}
               />
             </ErrorBoundary>
             <ErrorBoundary fallback=''>

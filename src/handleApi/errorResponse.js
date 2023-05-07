@@ -4,10 +4,9 @@
 export default function returnError(res) {
     if (res.status == 400 || 
         res.status == 401 || 
-        res.status == 404 || 
-        res.status == 422) {
-        return res.status + ' ' + res.data.error;
+        res.status == 404  ) {
+        return res.data.error;
     }  else {
-        return 'Check your internet connection'
+        // return 'Check your internet connection'
     }
 }

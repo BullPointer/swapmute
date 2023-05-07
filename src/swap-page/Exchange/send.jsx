@@ -6,7 +6,7 @@ import ErrorBoundary from "../../ErrorBoundary";
 import CryptoListFrom from "./cryptoListFrom";
 
 
-function Send({sendCurrency, handleChange, value, valueError, handleClick}) {
+function Send({sendCurrency, handleChange, value, valueError, handleClick, handleFocus}) {
     const [selectCoin, setSelectCoin] = useState(false);
 
 
@@ -25,13 +25,13 @@ function Send({sendCurrency, handleChange, value, valueError, handleClick}) {
 
     return(
         <>
-            {/* <ErrorBoundary fallback=''> */}
+            <ErrorBoundary fallback='check send function for error'>
                 <CryptoListFrom 
                     displayList={displayList}
                     clickWindow={clickWindow}
                     handleClick={handleClick}
                 />
-            {/* </ErrorBoundary> */}
+            </ErrorBoundary>
             <div className="exchange">
 
                 <div className="selling">
@@ -51,6 +51,7 @@ function Send({sendCurrency, handleChange, value, valueError, handleClick}) {
                     type="text" 
                     value={value}
                     onChange={handleChange} 
+                    onFocus={handleFocus}
                     />
                 </div>
                 {valueError && <div className="value-error">{valueError}</div>}
