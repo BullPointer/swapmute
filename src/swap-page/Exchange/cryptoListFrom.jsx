@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 
 
-function CryptoListFrom({ displayList, clickWindow}) {
+function CryptoListFrom({ displayList, clickWindow, handleClick}) {
 
     const [currencies, setCurrencies] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
 
     function stopWindow(e) {
         e.stopPropagation();
@@ -24,8 +25,16 @@ function CryptoListFrom({ displayList, clickWindow}) {
         console.log(returnError(result.response));
       }
     }
+    const handleChange = ({target}) => setSearchValue(target.value);
+
+    const filtered = currencies.filter((data) => {
+        return data.name.toLowerCase().includes(searchValue.toLowerCase());
+    })
+
+
     useEffect(() => {
         getApiFunc();
+        // console.log(currencies);
     }, []);
     return (
         <Fragment>
@@ -36,11 +45,17 @@ function CryptoListFrom({ displayList, clickWindow}) {
                         <input 
                         placeholder='Type your prefered Currency'
                         type="search" 
-                        name="search"/>
+                        name="search"
+                        value={searchValue}
+                        onChange={handleChange}
+                        />
                     </div>
                     <div className='listed-coins'>
-                    {currencies?.map((data, index) =>  (
-                        <div className='coins' key={index}>
+                    {filtered?.map((data, index) =>  (
+                        <div 
+                        key={index}
+                        onClick={() => handleClick(data)} 
+                        className='coins'>
                                 <img src={data.image} alt=""/>
                                <span style={{marginLeft: '10px'}}>
                                 {data.name}
@@ -56,5 +71,6 @@ function CryptoListFrom({ displayList, clickWindow}) {
 CryptoListFrom.prototypes = {
     displayList: PropTypes.any,
     clickWindow: PropTypes.any,
+    handleClick: PropTypes.any,
 }
 export default CryptoListFrom;

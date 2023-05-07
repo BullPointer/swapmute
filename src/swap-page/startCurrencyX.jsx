@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { getApi, getCurrency, getRange, getEstimatedValue } from "../handleApi/currencyApi";
+import { getCurrency, getRange, getEstimatedValue } from "../handleApi/currencyApi";
 import ErrorBoundary from "../ErrorBoundary";
 import Recieve from "./Exchange/recieve";
 import Send from "./Exchange/send";
@@ -11,7 +11,7 @@ function ExchangeCurrency() {
   const [exchangeData, setExchangeData] = useState({
     sendCurrency: {symbol: 'btc'},
     receiveCurrency: {symbol: 'eth'},
-    allCurrency: []
+
   });
   const [exchangeValue, setExchangeValue] = useState({
     sendAmount: 0.5,
@@ -22,7 +22,7 @@ function ExchangeCurrency() {
   const [valueError, setValueError] = useState(false);
 
   const sendChange = (event) => {
-    const regex = /^[0-9]*\.?[0-9]*$/; //  /^[0-9]*\.?[0-9]+$/
+    const regex = /^[0-9]*\.?[0-9]*$/ // /^[13][a-km-zA-HJ-NP-Z1-9]{25,80}$|^(bc1)[0-9A-Za-z]{25,80}$/ // /^[0-9]*\.?[0-9]*$/;   /^[0-9]*\.?[0-9]+$/;
     const inputValue = event.target.value;
 
     if (regex.test(inputValue)) {
@@ -42,33 +42,30 @@ function ExchangeCurrency() {
       setValueError(false);
     }
   };
+  function handleSelectcurrency(data) {
+    setExchangeData({...exchangeData, sendCurrency: data});
+    getApiRange();
+    getEstimatedAmount();
+  }
 
-    async function getApiFunc() {
-      const result = await getApi(link + 'get_all_currencies');
-      if(result.status === 200) {
-        setExchangeData({...exchangeData, allCurrency: result.data});
-      } else {
-        console.log(returnError(result.response));
-      }
-    }
-    async function getApiCurrency() {
-      const cryptoFrom = await getCurrency(
-        link + 'get_currency', 
-        exchangeData['sendCurrency'].symbol);
-      const cryptoTo = await getCurrency(
-        link + 'get_currency', 
-        exchangeData['receiveCurrency'].symbol);
-      if(cryptoFrom.status === 200 && cryptoTo.status === 200) {
-        setExchangeData({
-          ...exchangeData, 
-          sendCurrency: cryptoFrom.data,
-          receiveCurrency: cryptoTo.data
-        });
+  async function getApiCurrency() {
+    const cryptoFrom = await getCurrency(
+      link + 'get_currency', 
+      exchangeData['sendCurrency'].symbol);
+    const cryptoTo = await getCurrency(
+      link + 'get_currency', 
+      exchangeData['receiveCurrency'].symbol);
+    if(cryptoFrom.status === 200 && cryptoTo.status === 200) {
+      setExchangeData({
+        ...exchangeData, 
+        sendCurrency: cryptoFrom.data,
+        receiveCurrency: cryptoTo.data
+      });
 
-      } else {
-        console.log(returnError(cryptoFrom.response));
-      }
+    } else {
+      console.log(returnError(cryptoFrom.response));
     }
+  }
 
     async function getApiRange() {
       const range = await getRange(
@@ -104,7 +101,7 @@ function ExchangeCurrency() {
     }, [exchangeValue.sendAmount]);
 
     useEffect(() => {
-      getApiFunc();
+
       getApiCurrency();
       getApiRange();
       if (exchangeValue.receiveAmount == '0') {
@@ -112,6 +109,7 @@ function ExchangeCurrency() {
       } else {
         setExchangeValue({...exchangeValue, isLoading: false});
       }
+
     }, []);
 
     return(
@@ -128,6 +126,7 @@ function ExchangeCurrency() {
               handleChange={sendChange}
               value={exchangeValue.sendAmount}
               valueError={valueError}
+              handleClick={handleSelectcurrency}
               />
             </ErrorBoundary>
             <ErrorBoundary fallback=''>

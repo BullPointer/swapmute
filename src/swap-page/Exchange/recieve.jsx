@@ -24,7 +24,7 @@ function Recieve({receiveCurrency, value, isLoading}) {
 
     return(
         <>
-            <ErrorBoundary fallback='Check receive component for any error'>
+            <ErrorBoundary fallback='check receive function for error'>
                 <CryptoListTo 
                     displayList={displayList}
                     clickWindow={clickWindow}

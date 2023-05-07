@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import '../../Styling/exchange.css';
 import { Fragment, useEffect, useState } from "react";
+import returnError from '../../handleApi/errorResponse';
 import { getApi } from '../../handleApi/currencyApi';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
@@ -7,8 +9,9 @@ import { Icon } from '@iconify/react';
 
 function CryptoListTo({ displayList, clickWindow}) {
 
+    const [searchValue, setSearchValue] = useState('');
     const [currencies, setCurrencies] = useState([]);
-    const [error, setError] = useState('');
+
 
     function stopWindow(e) {
         e.stopPropagation();
@@ -16,14 +19,19 @@ function CryptoListTo({ displayList, clickWindow}) {
 
     async function getApiFunc() {
       const link = 'https://api.simpleswap.io/get_all_currencies';
-      const response = await getApi(link)
-      if(response.status === 200) {
-        setCurrencies(response.data);
+      const result = await getApi(link)
+      if(result.status === 200) {
+        setCurrencies(result.data);
       } else {
-        const { data } = response.response;
-        setError(data.error);
+        console.log(returnError(result.response));
       }
     }
+    const handleChange = ({target}) => setSearchValue(target.value);
+
+    const filtered = currencies.filter((data) => {
+        return data.name.toLowerCase().includes(searchValue.toLowerCase());
+    })
+    
     useEffect(() => {
         getApiFunc();
     }, []);
@@ -36,10 +44,13 @@ function CryptoListTo({ displayList, clickWindow}) {
                         <input 
                         placeholder='Type your prefered Currency'
                         type="search" 
-                        name="search"/>
+                        name="search"
+                        value={searchValue}
+                        onChange={handleChange}
+                        />
                     </div>
                     <div className='listed-coins'>
-                    {currencies?.map((data, index) =>  (
+                    {filtered?.map((data, index) =>  (
                         <div className='coins' key={index}>
                                 <img src={data.image} alt=""/>
                                <span style={{marginLeft: '10px'}}>
