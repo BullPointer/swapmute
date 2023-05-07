@@ -1,11 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
+import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
-import CryptoList from "./cryptList";
+import ErrorBoundary from "../../ErrorBoundary";
+import CryptoListFrom from "./cryptoListFrom";
 
 
-function Send() {
+function Send({sendCurrency, handleChange, value, valueError}) {
     const [selectCoin, setSelectCoin] = useState(false);
-    const [value, setValue] = useState("");
+
 
     function showList(e) {
         e.stopPropagation();
@@ -15,22 +18,19 @@ function Send() {
     function clickWindow() {
         setSelectCoin(false)
     }
+
     function displayList() {
-        return selectCoin ? 'list' : '';
+        return selectCoin ? 'list' : 'none';
     }
-    const handleChange = (event) => {
-        const regex = /^[0-9]*\.?[0-9]*$/; //  /^[0-9]*\.?[0-9]+$/
-        const inputValue = event.target.value;
-        if (regex.test(inputValue)) {
-          setValue(inputValue);
-        }
-    };
+
     return(
         <>
-            <CryptoList 
-                displayList={displayList}
-                clickWindow={clickWindow}
-            />
+            <ErrorBoundary fallback='Check send component for any error'>
+                <CryptoListFrom 
+                    displayList={displayList}
+                    clickWindow={clickWindow}
+                />
+            </ErrorBoundary>
             <div className="exchange">
 
                 <div className="selling">
@@ -39,26 +39,36 @@ function Send() {
                 </div>
                 <div className="bitcoin">
                     <div className="select" onClick={showList}>
-                        <div value="fa-brands fa-bitcoin">BTC</div>
+                        <div value="fa-brands fa-bitcoin">
+                        {sendCurrency['symbol'].toUpperCase()}
+                        </div>
                         <Icon icon="material-symbols:arrow-drop-down-circle-outline" />
                     </div>
                     <input 
                     className="amount"
                     placeholder="0.00"
                     type="text" 
-                    value={value} 
-                    id="amount"
+                    value={value}
                     onChange={handleChange} 
                     />
                 </div>
-
+                {valueError && <div className="value-error">{valueError}</div>}
                 <div className="selling">
                     <p>Current Rate</p>
-                    <p><span style={{color: 'green'}}>1 BTC = 27.536.20 USDT</span></p>
+                    <p><span style={{color: 'green'}}>
+                    1 {sendCurrency['symbol'].toUpperCase()} 
+                    = 27.536.20 USDT
+                    </span></p>
                 </div>
 
             </div>
         </>
-    )
+    ) 
+}
+Send.prototype = {
+    sendCurrency: PropTypes.object,
+    symbol: PropTypes.string,
+    value: PropTypes.string,
+    valueError: PropTypes.string,
 }
 export default Send;

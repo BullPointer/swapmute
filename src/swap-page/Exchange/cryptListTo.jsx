@@ -1,21 +1,32 @@
 import '../../Styling/exchange.css';
 import { Fragment, useEffect, useState } from "react";
-import Proptypes from 'prop-types'
+import { getApi } from '../../handleApi/currencyApi';
+import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
-import { cryptoSymbol } from "crypto-symbol";
 
 
+function CryptoListTo({ displayList, clickWindow}) {
 
-function CryptoList({ displayList, clickWindow }) {
-    const [getCurrency, setCurrency] = useState([]);
+    const [currencies, setCurrencies] = useState([]);
+    const [error, setError] = useState('');
 
     function stopWindow(e) {
         e.stopPropagation();
     }
+
+    async function getApiFunc() {
+      const link = 'https://api.simpleswap.io/get_all_currencies';
+      const response = await getApi(link)
+      if(response.status === 200) {
+        setCurrencies(response.data);
+      } else {
+        const { data } = response.response;
+        setError(data.error);
+      }
+    }
     useEffect(() => {
-        const { get } = cryptoSymbol({});
-        setCurrency(Object.keys(get().NSPair))
-    }, [])
+        getApiFunc();
+    }, []);
     return (
         <Fragment>
             <div onClick={clickWindow} className={`coin-container ${displayList()}`}>
@@ -28,12 +39,12 @@ function CryptoList({ displayList, clickWindow }) {
                         name="search"/>
                     </div>
                     <div className='listed-coins'>
-                    {getCurrency.map((data, index) =>  (
+                    {currencies?.map((data, index) =>  (
                         <div className='coins' key={index}>
-                               {<Icon 
-                               icon={`simple-icons:${data.toLocaleLowerCase()}`} 
-                               />} 
-                               {` ${data}`}
+                                <img src={data.image} alt=""/>
+                               <span style={{marginLeft: '10px'}}>
+                                {data.name}
+                                </span>
                         </div>
                     ))}
                     </div>
@@ -42,8 +53,8 @@ function CryptoList({ displayList, clickWindow }) {
         </Fragment>
     )
 }
-CryptoList.prototypes = {
-    displayList: Proptypes.any,
-    clickWindow: Proptypes.any,
+CryptoListTo.prototypes = {
+    displayList: PropTypes.any,
+    clickWindow: PropTypes.any,
 }
-export default CryptoList;
+export default CryptoListTo;

@@ -1,10 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
+import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
-import CryptoList from "./cryptList";
+import ErrorBoundary from "../../ErrorBoundary";
+import CryptoListTo from "./cryptListTo";
 
-function Recieve() {
+function Recieve({receiveCurrency, value, isLoading}) {
     const [selectCoin, setSelectCoin] = useState(false);
-    const [value, setValue] = useState("");
+    const loading = <Icon style={{padding: '0', fontSize: '30px'}} className="amount" icon="streamline:interface-page-controller-loading-3-progress-loading-dot-load-wait-waiting" />
+
 
     function showList(e) {
         e.stopPropagation();
@@ -17,19 +21,15 @@ function Recieve() {
     function displayList() {
         return selectCoin ? 'list' : '';
     }
-    const handleChange = (event) => {
-        const regex = /^[0-9]*\.?[0-9]*$/; //  /^[0-9]*\.?[0-9]+$/
-        const inputValue = event.target.value;
-        if (regex.test(inputValue)) {
-          setValue(inputValue);
-        }
-    };
+
     return(
         <>
-            <CryptoList 
-                displayList={displayList}
-                clickWindow={clickWindow}
-            />
+            <ErrorBoundary fallback='Check receive component for any error'>
+                <CryptoListTo 
+                    displayList={displayList}
+                    clickWindow={clickWindow}
+                />
+            </ErrorBoundary>
         <div className="exchange">
 
             <div className="selling">
@@ -38,26 +38,37 @@ function Recieve() {
 
             <div className="bitcoin">
                 <div className="select" onClick={showList}>
-                    <div value="fa-brands fa-bitcoin">BTC</div>
+                    <div value="fa-brands fa-bitcoin">
+                        {receiveCurrency['symbol'].toUpperCase()}
+                    </div>
                     <Icon icon="material-symbols:arrow-drop-down-circle-outline" />
                 </div>
-                    <input 
+                {
+                    isLoading === true ? loading : <input 
                     className="amount"
                     placeholder="0.00"
                     type="text" 
                     value={value} 
                     id="amount"
-                    onChange={handleChange} 
+                    name="receiveAmount"
+                    disabled
                     />
+                }
+                    
             </div>
 
             <div className="selling">
-                <p>Actual fee</p>
-                <p><span>1.4%</span></p>
+                <p>Fees included</p>
             </div>
 
         </div>
         </>
     )
+}
+
+Recieve.prototype = {
+    receiveCurrencyData: PropTypes.object,
+    receiveCurrency: PropTypes.string,
+    isLoading: PropTypes.bool
 }
 export default Recieve;
