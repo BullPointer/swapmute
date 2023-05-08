@@ -6,7 +6,16 @@ import ErrorBoundary from "../../ErrorBoundary";
 import CryptoListFrom from "./cryptoListFrom";
 
 
-function Send({sendCurrency, handleChange, value, valueError, handleClick, handleFocus}) {
+function Send({
+    sendCurrency, 
+    receiveCurrency,
+    handleChange, 
+    value, 
+    valueError, 
+    handleClick, 
+    handleFocus,
+    maxRange
+}) {
     const [selectCoin, setSelectCoin] = useState(false);
 
 
@@ -36,11 +45,16 @@ function Send({sendCurrency, handleChange, value, valueError, handleClick, handl
 
                 <div className="selling">
                     <p style={{color: "#fff"}}>You send</p>
-                    <p>Available: <span style={{color:"yellow"}}>2 BTC</span></p>
+                    <p>Available: 
+                        <span style={{color:"yellow"}}> {maxRange && maxRange } </span> 
+                        <span style={{color:"yellow"}}>
+                            {sendCurrency['symbol'] 
+                        &&  sendCurrency['symbol'].toUpperCase()}</span>
+                    </p>
                 </div>
                 <div className="bitcoin">
                     <div className="select" onClick={showList}>
-                        <div value="fa-brands fa-bitcoin">
+                        <div className="symbol" value="fa-brands fa-bitcoin">
                         {sendCurrency['symbol'] && sendCurrency['symbol'].toUpperCase()}
                         </div>
                         <Icon icon="material-symbols:arrow-drop-down-circle-outline" />
@@ -59,7 +73,7 @@ function Send({sendCurrency, handleChange, value, valueError, handleClick, handl
                     <p>Current Rate</p>
                     <p><span style={{color: 'green'}}>
                     1 {sendCurrency['symbol'] && sendCurrency['symbol'].toUpperCase()} 
-                    = 27.536.20 USDT
+                    = 27.536.20 {receiveCurrency['symbol'] && receiveCurrency['symbol'].toUpperCase()}
                     </span></p>
                 </div>
 
@@ -73,5 +87,7 @@ Send.prototype = {
     value: PropTypes.string,
     valueError: PropTypes.string,
     handleClick: PropTypes.any,
+    receiveCurrency: PropTypes.object,
+    maxRange: PropTypes.any,
 }
 export default Send;

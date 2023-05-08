@@ -169,8 +169,8 @@ body{
 	justify-content: flex-start;
 }
 
-.exchange-container .exchange-box .exchange .bitcoin select, .select{
-	width: 100px;
+.exchange-container .exchange-box .exchange .bitcoin .select{
+	width: auto;
 	padding: 8px;
 	border-radius: 15px;
 	color: #fff;
@@ -183,7 +183,7 @@ body{
 .exchange-container .exchange-box .exchange .bitcoin .select{
 	display: flex;
 	column-gap: 5px;
-	width: 80px;
+	width: auto;
 	padding: 8px;
 	border-radius: 15px;
 	color: #fff;

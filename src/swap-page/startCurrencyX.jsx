@@ -170,11 +170,13 @@ function ExchangeCurrency() {
             <ErrorBoundary fallback=''>
               <Send 
               sendCurrency={exchangeData.sendCurrency}
+              receiveCurrency={exchangeData.receiveCurrency}
               handleChange={sendChange}
               value={exchangeValue.sendAmount}
               valueError={valueError}
               handleClick={handleSendcurrency}
               handleFocus={handleFocus}
+              maxRange={range.maxRange}
               />
             </ErrorBoundary>
             <ErrorBoundary fallback=''>
