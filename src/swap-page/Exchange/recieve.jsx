@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import ErrorBoundary from "../../ErrorBoundary";
 import CryptoListTo from "./cryptListTo";
 
-function Recieve({receiveCurrency, value, isLoading}) {
+function Recieve({receiveCurrency, value, isLoading, handleClick}) {
     const [selectCoin, setSelectCoin] = useState(false);
     const loading = <Icon style={{padding: '0', fontSize: '30px'}} className="amount" icon="streamline:interface-page-controller-loading-3-progress-loading-dot-load-wait-waiting" />
 
@@ -26,6 +26,7 @@ function Recieve({receiveCurrency, value, isLoading}) {
         <>
             <ErrorBoundary fallback='check receive function for error'>
                 <CryptoListTo 
+                    handleClick={handleClick}
                     displayList={displayList}
                     clickWindow={clickWindow}
                 />
@@ -69,6 +70,7 @@ function Recieve({receiveCurrency, value, isLoading}) {
 Recieve.prototype = {
     receiveCurrencyData: PropTypes.object,
     receiveCurrency: PropTypes.string,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    handleClick: PropTypes.any,
 }
 export default Recieve;

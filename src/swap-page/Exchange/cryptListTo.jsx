@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 
 
-function CryptoListTo({ displayList, clickWindow}) {
+function CryptoListTo({ displayList, clickWindow, handleClick}) {
 
     const [searchValue, setSearchValue] = useState('');
     const [currencies, setCurrencies] = useState([]);
@@ -51,10 +51,12 @@ function CryptoListTo({ displayList, clickWindow}) {
                     </div>
                     <div className='listed-coins'>
                     {filtered?.map((data, index) =>  (
-                        <div className='coins' key={index}>
+                        <div 
+                            onClick={() => handleClick(data)} 
+                            className='coins' key={index}>
                                 <img src={data.image} alt=""/>
-                               <span style={{marginLeft: '10px'}}>
-                                {data.name}
+                                <span style={{marginLeft: '10px'}}>
+                                    {data.name}
                                 </span>
                         </div>
                     ))}
@@ -67,5 +69,6 @@ function CryptoListTo({ displayList, clickWindow}) {
 CryptoListTo.prototypes = {
     displayList: PropTypes.any,
     clickWindow: PropTypes.any,
+    handleClick: PropTypes.any,
 }
 export default CryptoListTo;

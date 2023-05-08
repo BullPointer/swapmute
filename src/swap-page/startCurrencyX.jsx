@@ -45,13 +45,22 @@ function ExchangeCurrency() {
       setValueError(false);
     }
   };
-  function handleSelectcurrency(data) {
+  function handleSendcurrency(data) {
     setExchangeValue({
       ...exchangeValue,
       isLoading: true
     })
     setValueError(false);
     setExchangeData({...exchangeData, sendCurrency: data});
+
+  }
+  function handleReceivecurrency(data) {
+    setExchangeValue({
+      ...exchangeValue,
+      isLoading: true
+    })
+    setValueError(false);
+    setExchangeData({...exchangeData, receiveCurrency: data});
 
   }
   function handleFocus() {
@@ -109,30 +118,35 @@ function ExchangeCurrency() {
           isLoading: false
         });
         setValueError(false);
-        setExchangeValue({...exchangeValue, isLoading: false});
+        // setExchangeValue({...exchangeValue, isLoading: false});
 
       } else {
         if (res.response.status == 422) {
           toast('Unprocessable Entity');
+          setExchangeValue({...exchangeValue, isLoading: true});
         } else {
           setValueError(false);
           toast(returnError(res.response));
+          setExchangeValue({...exchangeValue, isLoading: true});
         }
-        setExchangeValue({...exchangeValue, isLoading: true});
       }
     }
 
     useEffect(() => {
       const debounceTimer = setTimeout(() => {
         getEstimatedAmount();
-      }, 2000);
+      }, 400);
       return () => clearTimeout(debounceTimer);
     }, [exchangeValue.sendAmount]);
+    useEffect(() => {
+        getEstimatedAmount();
+
+    }, [exchangeData.receiveCurrency]);
 
     useEffect(() => {
       getApiRange();
 
-    }, [exchangeData.sendCurrency, exchangeValue.sendAmount]);
+    }, [exchangeData.sendCurrency, exchangeData.receiveCurrency, exchangeValue.sendAmount]);
     useEffect(() => {
       getApiCurrency();
       // getApiRange();
@@ -159,7 +173,7 @@ function ExchangeCurrency() {
               handleChange={sendChange}
               value={exchangeValue.sendAmount}
               valueError={valueError}
-              handleClick={handleSelectcurrency}
+              handleClick={handleSendcurrency}
               handleFocus={handleFocus}
               />
             </ErrorBoundary>
@@ -168,6 +182,7 @@ function ExchangeCurrency() {
               receiveCurrency={exchangeData.receiveCurrency}
               value={exchangeValue.receiveAmount}
               isLoading={exchangeValue.isLoading}
+              handleClick={handleReceivecurrency}
               />
             </ErrorBoundary>
             <i className="fa-solid fa-arrow-right-arrow-left"></i>
