@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import ErrorBoundary from "../../ErrorBoundary";
 import CryptoListFrom from "./cryptoListFrom";
@@ -14,23 +12,11 @@ function Send({
     valueError, 
     handleClick, 
     handleFocus,
-    maxRange
+    maxRange,
+    showList,
+    clickWindow,
+    displayList,
 }) {
-    const [selectCoin, setSelectCoin] = useState(false);
-
-
-    function showList(e) {
-        e.stopPropagation();
-        setSelectCoin(true);
-    }
-
-    function clickWindow() {
-        setSelectCoin(false)
-    }
-
-    function displayList() {
-        return selectCoin ? 'list' : 'none';
-    }
 
     return(
         <>
@@ -76,18 +62,9 @@ function Send({
                     = 27.536.20 {receiveCurrency['symbol'] && receiveCurrency['symbol'].toUpperCase()}
                     </span></p>
                 </div>
-
             </div>
         </>
     ) 
 }
-Send.prototype = {
-    sendCurrency: PropTypes.object,
-    symbol: PropTypes.string,
-    value: PropTypes.string,
-    valueError: PropTypes.string,
-    handleClick: PropTypes.any,
-    receiveCurrency: PropTypes.object,
-    maxRange: PropTypes.any,
-}
+
 export default Send;

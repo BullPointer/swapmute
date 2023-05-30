@@ -12,10 +12,8 @@ function CryptoListFrom({ displayList, clickWindow, handleClick}) {
     const [currencies, setCurrencies] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
-    function stopWindow(e) {
-        e.stopPropagation();
-    }
-
+    const stopWindow = (e) => e.stopPropagation();
+    
     async function getApiFunc() {
       const link = 'https://api.simpleswap.io/get_all_currencies';
       const result = await getApi(link)
@@ -36,7 +34,7 @@ function CryptoListFrom({ displayList, clickWindow, handleClick}) {
         getApiFunc();
         // console.log(currencies);
     }, []);
-    return (
+    return ( 
         <Fragment>
             <div onClick={clickWindow} className={`coin-container ${displayList()}`}>
                 <div onClick={stopWindow} className="coin-box">

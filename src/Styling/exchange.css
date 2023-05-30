@@ -51,15 +51,13 @@
     background: #f15b2d;
 }
 
-.coin-container .coin-box .listed-coins {
-    /* overflow-y: hidden; */
-}
+
 .coin-container .coin-box .listed-coins {
     overflow-y: auto;
     background: white;
     height: 100%;
     scroll-behavior: smooth;
-    /* text-align: left; */
+    
 }
 .coin-container .coin-box .listed-coins .coins{
     padding: 8px;
@@ -76,3 +74,8 @@
     opacity: 1;
 }
 
+@media only screen and (max-width: 700px){
+    .coin-container .coin-box {
+        width: 80%;
+    }
+}

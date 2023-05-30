@@ -13,7 +13,7 @@ function ExchangeCurrency() {
   const [exchangeData, setExchangeData] = useState({
     sendCurrency: {symbol: 'btc'},
     receiveCurrency: {symbol: 'eth'},
-
+    
   });
   const [exchangeValue, setExchangeValue] = useState({
     sendAmount: 0.5,
@@ -22,8 +22,11 @@ function ExchangeCurrency() {
   });
   const [range, setRange] = useState({minRange: '', maxRange: ''});
   const [valueError, setValueError] = useState(false);
+  const [selectCoin, setSelectCoin] = useState(false);
 
-
+  const showList = () => setSelectCoin(true);
+  const clickWindow = () => setSelectCoin(false);
+  const displayList = () => selectCoin ? 'list' : 'none';
   const sendChange = (event) => {
     const regex = /^[0-9]*\.?[0-9]*$/ // /^[13][a-km-zA-HJ-NP-Z1-9]{25,80}$|^(bc1)[0-9A-Za-z]{25,80}$/ // /^[0-9]*\.?[0-9]*$/;   /^[0-9]*\.?[0-9]+$/;
     const inputValue = event.target.value;
@@ -47,12 +50,11 @@ function ExchangeCurrency() {
   };
   function handleSendcurrency(data) {
     setExchangeValue({
-      ...exchangeValue,
-      isLoading: true
+      ...exchangeValue, sendAmount: 0.5, isLoading: true
     })
     setValueError(false);
     setExchangeData({...exchangeData, sendCurrency: data});
-
+    setSelectCoin(false);
   }
   function handleReceivecurrency(data) {
     setExchangeValue({
@@ -135,7 +137,7 @@ function ExchangeCurrency() {
     useEffect(() => {
       const debounceTimer = setTimeout(() => {
         getEstimatedAmount();
-      }, 400);
+      }, 600);
       return () => clearTimeout(debounceTimer);
     }, [exchangeValue.sendAmount]);
     useEffect(() => {
@@ -169,6 +171,9 @@ function ExchangeCurrency() {
           <div className="exchange-box">
             <ErrorBoundary fallback=''>
               <Send 
+              showList={showList}
+              clickWindow={clickWindow}
+              displayList={displayList}
               sendCurrency={exchangeData.sendCurrency}
               receiveCurrency={exchangeData.receiveCurrency}
               handleChange={sendChange}
