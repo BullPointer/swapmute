@@ -51,6 +51,8 @@ body{
 }
 
 .active{
+	display: flex;
+	/* display: none; */
 	border-top: 2px solid #fff;
 }
 
@@ -440,7 +442,7 @@ footer .social-media .a {
 		left: 0;
 		top: 0;
 		background-color: #fff;
-		display: flex;
+		display: none;
 		justify-content: center;
 		align-items: center;
 		transform: translateX(100%);
@@ -468,6 +470,7 @@ footer .social-media .a {
 	}
 
 	.navbar .nav.active{
+		display: flex;
 		transform: translateX(0%);
 	}
 	footer{

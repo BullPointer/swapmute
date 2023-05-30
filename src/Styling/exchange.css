@@ -8,8 +8,9 @@
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     background: transparent;
-    z-index: 1;
+    z-index: 100;
 }
 .list {
     display: flex;
@@ -69,12 +70,12 @@
 }
 .coin-container .coin-box .listed-coins .coins:hover{
     background: #ff4b12;
-    /* background: rgb(149, 196, 149); */
     color: black;
     opacity: 1;
 }
 
 @media only screen and (max-width: 700px){
+
     .coin-container .coin-box {
         width: 80%;
     }

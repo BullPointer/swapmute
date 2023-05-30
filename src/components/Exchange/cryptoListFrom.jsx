@@ -58,7 +58,7 @@ function CryptoListFrom({ displayList, clickWindow, handleClick}) {
                                <span style={{marginLeft: '10px'}}>
                                 {data.name}
                                 </span>
-                        </div>
+                        </div> 
                     ))}
                     </div>
                 </div>
