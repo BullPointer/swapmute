@@ -1,5 +1,6 @@
 {
   "name": "swapmute-dev",
+  "homepage": "https://bullpointer.github.io/swapmute/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
