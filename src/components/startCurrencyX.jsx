@@ -195,7 +195,7 @@ function ExchangeCurrency() {
             <i className="fa-solid fa-arrow-right-arrow-left"></i>
           </div>
           <a href="#">Exchange</a>
-
+ 
         </div> 
 
          {/* <!-- end of currency exchange --> */}

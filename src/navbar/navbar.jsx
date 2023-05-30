@@ -16,10 +16,10 @@ function Navbar() {
 
       <div className="navbar">
         <h2>© SWAPMUTE</h2>
-        <nav className="nav">
+        <nav className={`nav ${toggleClass}`}>
           <ul className="ul">
             <li><a href="#">Support</a></li>
-            <li><a href="#" className="active">Exchange</a></li>
+            <li><a href="#">Exchange</a></li>
             <li><a href="#">Blog</a></li>
           </ul>
         </nav>

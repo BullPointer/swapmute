@@ -39,7 +39,7 @@ function Recieve({receiveCurrency, value, isLoading, handleClick}) {
 
             <div className="bitcoin">
                 <div className="select" onClick={showList}>
-                    <div value="fa-brands fa-bitcoin">
+                    <div className="symbol" value="fa-brands fa-bitcoin">
                         {receiveCurrency['symbol'].toUpperCase()}
                     </div>
                     <Icon icon="material-symbols:arrow-drop-down-circle-outline" />

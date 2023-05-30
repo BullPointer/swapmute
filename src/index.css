@@ -180,7 +180,7 @@ body{
 	outline: none;
 	border: none;
 }
-.exchange-container .exchange-box .exchange .bitcoin .select{
+.exchange-container .exchange-box .exchange .bitcoin .select{ 
 	display: flex;
 	column-gap: 5px;
 	width: auto;
@@ -431,48 +431,74 @@ footer .social-media .a {
 }
 
 
-@media (max-width : 700px){
+@media (max-width: 700px){
 
-.navbar nav{
-	width: 100%;
-	height: 200px;
-	position: absolute;
-	left: 0;
-	top: 0;
-	background-color: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transform: translateX(100%);
-	transition: .5s;
-	z-index: 999;
-}
+	.navbar nav{
+		width: 100%;
+		height: 200px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-color: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transform: translateX(100%);
+		transition: .5s;
+		z-index: 999;
+	}
 
-.navbar .nav ul{
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-}
+	.navbar .nav ul{
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
 
-.navbar .nav ul li a{
-	color: #000;
-	padding: 25px 0;
-	font-size: 22px;
-	font-weight: 600;
-}
+	.navbar .nav ul li a{
+		color: #000;
+		padding: 25px 0;
+		font-size: 22px;
+		font-weight: 600;
+	}
 
 
-.toggle{
-	display: block;
-	z-index: 9999;
-}
+	.toggle{
+		display: block;
+		z-index: 9999;
+	}
 
-.navbar .nav.active{
-	transform: translateX(0%);
-}
+	.navbar .nav.active{
+		transform: translateX(0%);
+	}
+	footer{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	footer .copy-right, .Disclaimer, .about, .social-media{
+		margin: 0 auto;
+		padding: 20px;
+		text-align: center;
+	}
+	footer .Company{
+		margin-top: 0;
+		margin-right: 0;
+		padding: 20px;
+		text-align: center;
+	}
+	
 }
 
 @media (max-width :675px){
+	.swapmute .tutorial{
+		flex-direction: column;
+		width: auto;
+		padding: 0;
+	}
+	.swapmute .tutorial p{
+		justify-content: center;
+	}
     .exchange-container{
     	margin: 20px 15px;
     }
@@ -485,12 +511,31 @@ footer .social-media .a {
 	.exchange-container .exchange-box .exchange {
         width: 90%;
     }
+	.exchange-container .exchange-box .exchange .bitcoin {
+		min-width: 100%;
+	}
+	.exchange-container .exchange-box .exchange .bitcoin .select{
+		width: auto;
+		padding: 0;
+	}
+	.exchange-container .exchange-box .exchange .bitcoin .select .symbol{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: small;
+		padding: 0 4px;
+	}
+	.exchange-container .exchange-box .exchange .bitcoin .select .iconify {
+		padding-right: 5px;
+		font-size: 30px;
+	}
+}
+@media (max-width:320px){
+	.accordion  .contentbx .label::before{
+		right: 0;
+	}
 
-    .exchange-container .exchange-box .exchange .bitcoin {
-    	max-width: 500px;
-    }
-
-    .exchange-container .exchange-box .exchange {
-        width: 90%;
-    }
+	.accordion  .contentbx .label, .content{
+		font-size: 15px;
+	}
 }
