@@ -17,7 +17,7 @@ function Navbar() {
       {/* <!-- start of navigation --> */}
 
       <div className="w-full bg-black p-0 lg:p-6 relative flex flex-col lg:flex-row justify-center items-center">
-        <h2 className="flex justify-between w-full lg:w-auto lg:p-0 p-4 bg-black lg:bg-black lg:absolute left-[20px] top-[50%] lg:-translate-y-[50%] text-[20px] text-white">
+        <h2 className="flex fixed top-0 left-0  justify-between w-full lg:w-auto lg:p-0 p-4 bg-black lg:bg-black lg:absolute lg:left-[20px] lg:top-[50%] lg:-translate-y-[50%] text-[20px] text-white">
           <div>© SWAPMUTE</div>
           <div className={"flex text-white lg:hidden"} onClick={() => toggle()}>
             {!btnState ? (
