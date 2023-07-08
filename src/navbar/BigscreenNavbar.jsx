@@ -34,9 +34,9 @@ const BigscreenNavbar = () => {
             </div>
           </div>
           {showList.key == "support" && (
-            <div className="z-10 absolute bg-black w-[150px] max-h-auto shadow-2xl shadow-black rounded border-t-4 border-red-600 -left-[50%] top-[100%]">
+            <div className="z-10 absolute bg-black w-[150px] max-h-auto shadow-2xl shadow-black rounded border-t-4 border-red-600 -left-[15%]  top-[100%]">
               {supportData.map(({ link, text }, index) => (
-                <Link key={index} to={`${link}`}>
+                <Link key={index} to={`/swapmute/${link}`}>
                   <div className="text-white p-1 mb-2 cursor-pointer hover:font-bold hover:bg-white hover:text-[#000]">
                     {text}
                   </div>
@@ -47,18 +47,18 @@ const BigscreenNavbar = () => {
         </li>
         <li className="relative">
           <div
-            onClick={() => handleShowList("test")}
+            onClick={() => handleShowList("currencies")}
             className="mx-[12px] text-[18px] font-[500] text-[#fff] hover:border-t-2 cursor-pointer"
           >
             <div className="flex flex-row justify-start items-center gap-2 ">
-              <div>Test</div>
+              <div>Currencies</div>
               <Icon icon="ep:arrow-down-bold" />
             </div>
           </div>
-          {showList.key == "test" && (
-            <div className="z-10 absolute bg-black w-[150px] max-h-auto shadow-2xl shadow-black rounded border-t-4 border-red-600 -left-[50%] top-[100%]">
+          {showList.key == "currencies" && (
+            <div className="z-10 absolute bg-black w-[150px] max-h-auto shadow-2xl shadow-black rounded border-t-4 border-red-600 top-[100%]">
               {supportData.map(({ link, text }, index) => (
-                <Link key={index} to={`${link}`}>
+                <Link key={index} to={`/swapmute/${link}`}>
                   <div className="text-white p-1 mb-2 cursor-pointer hover:font-bold hover:bg-white hover:text-[#000]">
                     {text}
                   </div>
@@ -80,7 +80,7 @@ const BigscreenNavbar = () => {
         <li>
           <NavLink
             className=" mx-[12px] text-[18px] font-[500] text-[#fff] hover:border-t-2"
-            to={"/blog"}
+            to={"/swapmute/blog"}
           >
             Blog
           </NavLink>

@@ -67,7 +67,7 @@ function SmallscreenNavbar() {
           <NavLink to="/swapmute">Exchange</NavLink>
         </li>
         <li className="bg-black-500 cursor-pointer w-full p-2 text-[22px] text-white font-[600]">
-          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/swapmute/blog">Blog</NavLink>
         </li>
       </ul>
     </nav>
