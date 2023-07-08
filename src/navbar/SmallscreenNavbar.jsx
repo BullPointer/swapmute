@@ -21,7 +21,7 @@ function SmallscreenNavbar() {
       : setShowList({ ...showList, key });
   };
   return (
-    <nav className="z-10 absolute left-0 top-16 w-full h-screen bg-[#242222] lg:hidden animate-cool-slide-in">
+    <nav className="z-10 fixed left-0 top-16 w-full h-screen bg-[#242222] lg:hidden animate-cool-slide-in">
       <ul className="lg:hidden w-full flex flex-col justify-start items-start">
         <li className=" bg-black-500 cursor-pointer w-full p-2 text-[22px] text-white font-[600]">
           <div
@@ -34,7 +34,7 @@ function SmallscreenNavbar() {
           {showList.key == "support" && (
             <div className="">
               {supportData.map(({ link, text }, index) => (
-                <Link key={index} to={`${link}`}>
+                <Link key={index} to={`/swapmute/${link}`}>
                   <div className="text-white p-1 mx-4 mb-2 cursor-pointer hover:font-bold hover:bg-white hover:text-[#000]">
                     {text}
                   </div>
@@ -45,16 +45,16 @@ function SmallscreenNavbar() {
         </li>
         <li className=" bg-black-500 cursor-pointer w-full p-2 text-[22px] text-white font-[600]">
           <div
-            onClick={() => handleShowList("test")}
+            onClick={() => handleShowList("currencies")}
             className="flex flex-row justify-start items-center gap-3"
           >
-            <div>Test</div>
+            <div>Currencies</div>
             <Icon icon="ep:arrow-down-bold" />
           </div>
-          {showList.key == "test" && (
+          {showList.key == "currencies" && (
             <div className="">
               {supportData.map(({ link, text }, index) => (
-                <Link key={index} to={`${link}`}>
+                <Link key={index} to={`/swapmute/${link}`}>
                   <div className="text-white p-1 mx-4 mb-2 cursor-pointer hover:font-bold hover:bg-white hover:text-[#000]">
                     {text}
                   </div>
