@@ -6,7 +6,7 @@ function StartTutorial() {
     <>
     {/* <!-- start of tutorial section --> */}
         <div  className="swapmute">
-            <p>How to use<span> SWAPMUTE</span> Exchange?</p>
+            <p>How to use<span> OSICRYPTO</span> Exchange?</p>
             <div className="tutorial">
                 <p><span>1</span>Select currency</p>
                 <p><span>2</span>Enter address</p>

@@ -9,10 +9,11 @@ import HowItWorks from "./pages/HowItWorks";
 import HelpCenter from "./pages/HelpCenter";
 import Support from "./pages/Support";
 import NotFound from "./pages/NoFound";
+import { BlogProvider } from "./context/BlogContext";
 
 function App() {
   return (
-    <>
+    <BlogProvider>
       <Navbar />
       <Routes>
         <Route path="*" element={<NotFound />} />
@@ -25,7 +26,7 @@ function App() {
         <Route path="/swapmute/support" element={<Support />} />
       </Routes>
       <Footer />
-    </>
+    </BlogProvider>
   );
 }
 

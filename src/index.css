@@ -11,6 +11,33 @@ body {
   overflow-x: hidden;
 }
 
+.gradient-blue-bg {
+  background: rgb(3, 3, 25);
+  background: linear-gradient(
+    90deg,
+    rgba(3, 3, 25, 0.9556197478991597) 0%,
+    rgba(26, 26, 56, 0.6755077030812324) 40%,
+    rgba(16, 36, 47, 1) 100%
+  );
+}
+.gradient-blue-card {
+  background: rgb(2, 2, 13);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 2, 13, 0.9556197478991597) 0%,
+    rgba(11, 11, 34, 0.6755077030812324) 40%,
+    rgba(2, 2, 13, 0.9556197478991597) 100%,
+  );
+  /* background: rgb(62, 62, 116);
+  background: linear-gradient(
+    90deg,
+    rgba(51, 51, 92, 0.956) 0%,
+    rgba(26, 26, 79, 0.6755077030812324) 40%,
+    rgba(26, 26, 79, 0.6755077030812324) 80%,
+    rgba(62, 62, 116, 0.9556197478991597) 100%
+  ); */
+}
+
 .swapmute {
   text-align: center;
   color: #fff;
@@ -365,8 +392,6 @@ footer .social-media .a {
 }
 
 @media (max-width: 700px) {
-
-
   footer {
     display: flex;
     flex-direction: column;
